@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
+	<!-- Utiliza o recurso Global Using -> namespaces não precisam mais ser referenciados -->
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
