@@ -13,6 +13,7 @@ namespace LanchesMac.Repositories
             _context = context;
         }
 
+        // Consulta que retorna todas as categorias 
         public IEnumerable<Categoria> Categorias => _context.Categorias;
     }
 }
