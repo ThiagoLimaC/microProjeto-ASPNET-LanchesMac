@@ -6,8 +6,7 @@ namespace LanchesMac.Models
     [Table("CarrinhoCompraItens")]
     public class CarrinhoCompraItem
     {
-        
-        public int CarrinhoCompraId { get; set; }
+        public int CarrinhoCompraItemId { get; set; }
         public Lanche Lanche { get; set; }
         public int Quantidade { get; set; }
         
