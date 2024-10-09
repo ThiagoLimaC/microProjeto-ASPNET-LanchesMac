@@ -11,6 +11,6 @@ namespace LanchesMac.Models
         public int Quantidade { get; set; }
         
         [StringLength(200)]
-        public string CarrinhoCompra { get; set; }
+        public string CarrinhoCompraId { get; set; }
     }
 }
