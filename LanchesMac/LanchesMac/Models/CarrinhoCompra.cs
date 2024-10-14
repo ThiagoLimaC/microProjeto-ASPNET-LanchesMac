@@ -36,10 +36,12 @@ namespace LanchesMac.Models
 
         public void AdicionarAoCarrinho(Lanche lanche)
         {
+            // verifica se o lanche já existe na tabela CarrinhoCompraItens
             var carrinhoCompraItem = _context.CarrinhoCompraItems.SingleOrDefault(
                 s=> s.Lanche.LancheId == lanche.LancheId &&
                 s.CarrinhoCompraId == CarrinhoCompraId);
 
+            //
             if (carrinhoCompraItem == null)
             {
                 carrinhoCompraItem = new CarrinhoCompraItem
