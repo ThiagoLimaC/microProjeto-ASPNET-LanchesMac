@@ -93,5 +93,14 @@ namespace LanchesMac.Models
                 .ToList());
         }
 
+        public void LimparCarrinho()
+        {
+            var carrinhoItens = _context.CarrinhoCompraItems
+                .Where(carrinho => carrinho.CarrinhoCompraId == CarrinhoCompraId);
+
+            _context.CarrinhoCompraItems.RemoveRange(carrinhoItens);
+            _context.SaveChanges();
+        }
+
     }
 }
