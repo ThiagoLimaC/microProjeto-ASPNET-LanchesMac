@@ -1,4 +1,5 @@
 ﻿using LanchesMac.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace LanchesMac.Models
 {
@@ -16,7 +17,7 @@ namespace LanchesMac.Models
         public static CarrinhoCompra GetCarrinho(IServiceProvider services)
         {
             // define uma sessão -> retorna a sessão caso for null
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()? .HttpContext.Session;
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
             //obtem um serviço do tipo do nosso contexto
             var context = services.GetService<AppDbContext>();
@@ -38,7 +39,7 @@ namespace LanchesMac.Models
         {
             // verifica se o lanche já existe na tabela CarrinhoCompraItens
             var carrinhoCompraItem = _context.CarrinhoCompraItems.SingleOrDefault(
-                s=> s.Lanche.LancheId == lanche.LancheId &&
+                s => s.Lanche.LancheId == lanche.LancheId &&
                 s.CarrinhoCompraId == CarrinhoCompraId);
 
             // se o item não existir no carrinho
@@ -79,6 +80,17 @@ namespace LanchesMac.Models
 
             _context.SaveChanges();
             return quantidadeLocal;
+        }
+
+        public List<CarrinhoCompraItem> GetCarrinhoCompraItens()
+        {
+            // retorna uma lista CarrinhoCompraItens ou cria trazendo os dados de uma consulta LINQ
+            return CarrinhoCompraItems ??
+                (CarrinhoCompraItems =
+                _context.CarrinhoCompraItems
+                .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
+                .Include(s => s.Lanche)
+                .ToList());
         }
 
     }
